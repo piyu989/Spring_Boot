@@ -2,13 +2,10 @@ package com.api.book.Services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.api.book.Entities.Book;
 
-@Service
+@Component
 public class BookServices {
 	private static List<Book>li=new ArrayList<>();
 	
@@ -22,14 +19,10 @@ public class BookServices {
 		return li;
 	}
 	
-	public Book getBook(int id) {
-		for(int i=0;i<li.size();i++) {
-			Book temp=li.remove(i);
-			if(temp.getId()==id) {
-				return temp;
-			}
-		}
-		return null;
+	public Book getBookById(int id) {
+		Book book=null;
+		book=li.stream().filter(e->e.getId()==id).findFirst().get();
+		return book;
 	}
 	
 }
