@@ -1,8 +1,11 @@
 package com.api.book.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,17 +24,31 @@ public class BookController {
 	private BookServices bookServices; 
 	
 	@GetMapping("/books")
-	public List<Book> getBooks() {
-		return this.bookServices.getAllBook();
+	public ResponseEntity<List<Book>> getBooks() {
+		List<Book>li=this.bookServices.getAllBook();
+		if(li.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.of(Optional.of(li));
 	}
 	@GetMapping("/books/{id}")
-	public Book getBook(@PathVariable("id") int ide) {
-		return bookServices.getBookById(ide);
+	public ResponseEntity<Book> getBook(@PathVariable("id") int ide) {
+		Book b=this.bookServices.getBookById(ide);
+		if(b==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.of(Optional.of(b));
 	}
 	@PostMapping("/books")
-	public Book addBook(@RequestBody Book b) {
-		this.bookServices.addBook(b);
-		return b;
+	public ResponseEntity<Book> addBook(@RequestBody Book b) {
+		Book bb=null;
+		try {
+			bb=this.bookServices.addBook(b);
+			return ResponseEntity.of(Optional.of(bb));
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 	@DeleteMapping("/books/{id}")
 	public void deleteBook(@PathVariable("id")int id) {
