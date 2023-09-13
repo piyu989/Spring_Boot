@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Component;
 import com.api.book.Entities.Book;
@@ -12,6 +13,7 @@ import com.api.book.dao.BookDao;
 @Component
 public class BookServices {
 
+	@Autowired
 	private BookDao li;
 	
 	//	private static List<Book>li=new ArrayList<>();

@@ -30,7 +30,8 @@ public class BookController {
 		if(li.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
-		return ResponseEntity.of(Optional.of(li));
+		return ResponseEntity.status(HttpStatus.OK).body(li);
+//		return ResponseEntity.of(Optional.of(li));
 	}
 	@GetMapping("/books/{id}")
 	public ResponseEntity<Book> getBook(@PathVariable("id") int ide) {
@@ -45,7 +46,7 @@ public class BookController {
 		Book bb=null;
 		try {
 			bb=this.bookServices.addBook(b);
-			return ResponseEntity.of(Optional.of(bb));
+			return ResponseEntity.status(HttpStatus.CREATED).body(bb);
 		}catch (Exception e) {
 			// TODO: handle exception
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -1,12 +1,24 @@
 package com.api.book.Entities;
 
-//import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-//@Entity
-public class Book {
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="books")
+public class Book {	
+	@Id
+	@Column(name ="Book_id")
 	private int id;
 	private String name;
-	private String authorName;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private Author authorName;
 	public int getId() {
 		return id;
 	}
@@ -19,13 +31,13 @@ public class Book {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAuthorName() {
+	public Author getAuthorName() {
 		return authorName;
 	}
-	public void setAuthorName(String authorName) {
+	public void setAuthorName(Author authorName) {
 		this.authorName = authorName;
 	}
-	public Book(int id, String name, String authorName) {
+	public Book(int id, String name, Author authorName) {
 		super();
 		this.id = id;
 		this.name = name;
