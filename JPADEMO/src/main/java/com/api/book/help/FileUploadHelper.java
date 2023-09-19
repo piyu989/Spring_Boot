@@ -1,4 +1,4 @@
-package com.api.help.fileupload;
+package com.api.book.help;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadHelper {
 	public final String upload_dir="D:\\Spring_Boot_Work_Space\\JPADEMO\\src\\main\\resources\\static//Images";
 	
-	public boolean uploadFile(MultipartFile fi) {
+	public boolean uploadFile(MultipartFile multipartFile) {
 		boolean f=false;
 		
 		try {
@@ -27,7 +27,7 @@ public class FileUploadHelper {
 //			fo.flush();
 //			fo.close();
 			
-			Files.copy(fi.getInputStream(), Paths.get(upload_dir+File.pathSeparator+fi.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(multipartFile.getInputStream(), Paths.get(upload_dir+File.separator+multipartFile.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
 			
 			
 			f=true;
