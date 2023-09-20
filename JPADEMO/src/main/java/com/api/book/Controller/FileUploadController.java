@@ -27,7 +27,7 @@ public class FileUploadController {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("file not found");
 				
 			}
-			if(file.getContentType().equals("image/jpg")) {
+			if(file.getContentType().equals("image/jpg/jpeg/png")) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("file is not good");
 			}
 			boolean f=fi.uploadFile(file);

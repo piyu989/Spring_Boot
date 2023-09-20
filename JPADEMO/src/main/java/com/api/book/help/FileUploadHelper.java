@@ -1,19 +1,22 @@
 package com.api.book.help;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileUploadHelper {
 	public final String upload_dir="D:\\Spring_Boot_Work_Space\\JPADEMO\\src\\main\\resources\\static//Images";
+//	public final String upload_dir=Paths.get("static/image").toAbsolutePath().toString();
 	
+	public FileUploadHelper(){
+		
+	}
 	public boolean uploadFile(MultipartFile multipartFile) {
 		boolean f=false;
 		
@@ -24,7 +27,7 @@ public class FileUploadHelper {
 //			
 //			FileOutputStream fo=new FileOutputStream(upload_dir+File.separator+fi.getOriginalFilename());
 //			
-//			fo.flush();
+//			fo.flush();		
 //			fo.close();
 			
 			Files.copy(multipartFile.getInputStream(), Paths.get(upload_dir+File.separator+multipartFile.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
