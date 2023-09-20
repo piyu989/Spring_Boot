@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.api.book.help.FileUploadHelper;
+
+import jakarta.servlet.Servlet;
 
 @RestController
 public class FileUploadController {
@@ -27,12 +30,13 @@ public class FileUploadController {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("file not found");
 				
 			}
-			if(file.getContentType().equals("image/jpg/jpeg/png")) {
+			if(file.getContentType().equals("image/jpg")) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("file is not good");
 			}
 			boolean f=fi.uploadFile(file);
 			if(f) {
-				return ResponseEntity.ok("uploaded succesfully");
+				return ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/Images/").path(file.getOriginalFilename()).toUriString());
+//				return ResponseEntity.ok("uploaded succesfully");
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
