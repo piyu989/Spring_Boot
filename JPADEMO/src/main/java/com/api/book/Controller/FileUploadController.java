@@ -35,7 +35,7 @@ public class FileUploadController {
 			}
 			boolean f=fi.uploadFile(file);
 			if(f) {
-				return ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/Images/").path(file.getOriginalFilename()).toUriString());
+				return ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/Images/").path(file.getOriginalFilename()).toUri	String());
 //				return ResponseEntity.ok("uploaded succesfully");
 			}
 		}catch (Exception e) {
