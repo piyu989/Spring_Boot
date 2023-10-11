@@ -1,6 +1,7 @@
 package com.leaf.Controller;
 
 import java.util.Date;
+import java.util.List;
 
 //import java.sql.Date;
 
@@ -18,5 +19,22 @@ public class MyController {
 		model.addAttribute("todayDate",new Date().toLocaleString());
 		
 		return "about";
+	}
+	
+	@GetMapping(value="/iterate")
+	public String iterateHandle(Model m) {
+		
+		List<String> names=List.of("Ganesh ji","Ram ji","krishna ji","vishnu ji");
+		m.addAttribute("names",names);
+		
+		return "iterate";
+	}
+	
+	@GetMapping(value="/condition")
+	public String conditionHandle(Model m) {
+		
+		m.addAttribute("isActive",true);
+		m.addAttribute("m","m");
+		return "condition";
 	}
 }

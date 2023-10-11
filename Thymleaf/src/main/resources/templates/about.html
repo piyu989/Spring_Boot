@@ -10,11 +10,16 @@
 	<h2>Owner of this is <span th:text="${name}"></span> </h2> 
 	<h2 th:text="${todayDate}"></h2>
 	<p>length of the string is <span th:text="${#strings.length(name)}" ></span> </p>
-
-	<div th:with="a=5,b=34,p='Piyush Thakur'">
+<!--we define a variable in div is only for div-->
+	<div th:with="a=5,b=34,p='Piyush Thakur',n=${name}">
 		<h1>value of a is <span th:text="${a}"></span> </h1>
 		<h1>value of b is <span th:text="${b}"></span> </h1>
 		<h1>value of b is <span th:text="${p}"></span> </h1>
+		<h1>value of n is <span th:text="${n}"></span> </h1>
+		
+		<h1>value of l which we does not defined is <div th:text="${l}" ></div> </h1>
+		
+		<h2 th:text="'sum of a '+${a}+' and '+${b}+' is '+${a+b}"></h2>
 		
 	</div>
 

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Condition handler</title>
+</head>
+<body>
+	<h1>ram ram</h1>
+	
+	<h1>user is <span th:style="${isActive}? 'color:red' : 'color:green'" 
+	th:text="isActive?'active':'inactive'"></spanth> </h1>
+	
+	<h1 th:if="${m}=='m'">ram ji</h1>
+	<h1 th:if="${m}=='f'">sita ji</h1>
+	
+</body>
+</html>
